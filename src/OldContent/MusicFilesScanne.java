@@ -1,14 +1,14 @@
-package com.octopus;
+package Oldcontent;
 
 import java.io.File;
 import java.util.Vector;
 
-import android.app.ProgressDialog;
-import android.content.Context;
-import android.database.Cursor;
-import android.net.Uri;
-import android.provider.MediaStore;
-import android.util.Log;
+//import android.app.ProgressDialog;
+//import android.content.Context;
+//import android.database.Cursor;
+//import android.net.Uri;
+//import android.provider.MediaStore;
+//import android.util.Log;
 
 import com.octopus.database.MusicRepository;
 import com.octopus.model.Music;
