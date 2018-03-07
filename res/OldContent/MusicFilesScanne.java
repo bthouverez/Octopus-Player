@@ -1,3 +1,11 @@
+/**
+ * Scanning directory to hceck if files changed
+ * Launched every opening in android
+ * 
+ * Can be useful
+ */
+
+
 package Oldcontent;
 
 import java.io.File;

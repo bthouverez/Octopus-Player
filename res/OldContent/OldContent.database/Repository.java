@@ -1,3 +1,7 @@
+/**
+ * Base DAO class
+ */
+
 package com.octopus.database;
 
 import java.util.ArrayList;

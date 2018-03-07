@@ -1,3 +1,7 @@
+/**
+ * Playlist DAO
+ */
+
 package com.octopus.database;
 
 import java.util.ArrayList;
