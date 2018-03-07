@@ -18,9 +18,13 @@ public class OctopusPlayer {
      * @param args the command line arguments
      */
     public static void main(String[] args) throws IOException {
-        // TODO code application logic here
-        Song m = new Song("res\\Steal This Album!\\15 Roulette.mp3");
-        System.out.println(m);
+        Song m1 = new Song("res\\Tasbum\\04 Testostu.mp3");
+        Song m2 = new Song("res\\Tasbum\\05 Tastusto.mp3");
+        Song m3 = new Song("res\\Tasbum\\04 Blazbum.mp3");
+        System.out.println(m1);
+        System.out.println(m2);
+        System.out.println(m3);
+    //m.writeTags();
     }
     
 }
