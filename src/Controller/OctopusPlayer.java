@@ -5,7 +5,9 @@
  */
 package Controller;
 
+import Model.Playlist;
 import Model.Song;
+import View.MainWindow;
 import java.io.IOException;
 
 /**
@@ -19,12 +21,23 @@ public class OctopusPlayer {
      */
     public static void main(String[] args) throws IOException {
         Song m1 = new Song("res\\Tasbum\\04 Testostu.mp3");
-        Song m2 = new Song("res\\Tasbum\\05 Tastusto.mp3");
-        Song m3 = new Song("res\\Tasbum\\04 Blazbum.mp3");
-        System.out.println(m1);
-        System.out.println(m2);
-        System.out.println(m3);
-    //m.writeTags();
+//        Song m3 = new Song("res\\Tasbum\\04 Blazbum.mp3");
+//        System.out.println(m1);
+//        m1.setTitle("ltitle");
+//        m1.setArtist("lartist");
+//        m1.setAlbum("lalbum");
+//        m1.setYear("lann");
+//        m1.setComment("lcommentaire");
+//        m1.setTrack(12);
+//        m1.setGenre(17);
+//        m1.writeTags();
+//        System.out.println(m1);
+
+        Playlist pl = new Playlist();
+        pl.loadDirectory("res/Tasbum");
+        
+//        MainWindow mw = new MainWindow();
+//        mw.setVisible(true);
+
     }
-    
 }

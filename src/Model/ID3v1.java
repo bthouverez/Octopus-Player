@@ -12,7 +12,8 @@ import java.io.RandomAccessFile;
 
 /**
  *
- * @author Babs
+ * @author Babs ID3v1 metadata management Attributes are array of chars of
+ * specific size, always filled with spaces to fit the 128 bytes
  */
 public class ID3v1 {
 
@@ -25,17 +26,17 @@ public class ID3v1 {
     //
     // 0-2 (3) -> id "TAG"
     // 3-32 (30) -> title 
-    private String title;
+    private char[] title;
     // 33-62 (30) -> artist
-    private String artist;
+    private char[] artist;
     // 63-92 (30) -> album
-    private String album;
+    private char[] album;
     // 93-96 (4) -> year
-    private String year;
-    // 97-126 (30) -> comment
-    private String comment;
+    private char[] year;
+    // 97-126 (28) -> comment
+    private char[] comment;
     /* ID3v1.1 
-    @Wikipedia The track number is stored in the last two bytes of the 
+     @Wikipedia The track number is stored in the last two bytes of the 
      comment field. If the comment is 29 or 30 characters long, no track number 
      can be stored. 
     
@@ -46,18 +47,42 @@ public class ID3v1 {
     // 126-127 (1) -> genre, Index in a list of genres, or 255
     private int genre;
 
-    private static final String[] GENRES = {"Blues", "Classic rock", "Country", "Dance", "Disco", "Funk", "Grunge", "Hip-hop", "Jazz", "Metal", "New age", "Oldies", "Autre", "Pop", "RnB", "Rap", "Reggae", "Rock", "Techno", "Musique industrielle (industrial)", "Rock alternatif (alternative)", "Ska", "Death metal", "Pranks", "Musique de film (soundtrack)", "Euro techno", "Ambient", "Trip hop", "Musique vocale (vocal)", "Jazz-funk", "Fusion", "Trance", "Musique classique (classical)", "Instrumental", "Acid", "House", "Musique de jeu vidéo", "Extrait sonore (sound clip ou sample)", "Gospel", "Musique bruitiste (noise)", "Rock alternatif", "Bass", "Soul", "Punk", "Space", "Musique de relaxation et de méditation (meditative)", "Pop instrumental", "Rock instrumental", "Musique ethnique", "Gothique", "Dark wave", "Techno-industrial", "Musique électronique", "Pop folk", "Eurodance", "Dream", "Rock sudiste (southern rock)", "Comédie", "Morceau culte (cult)", "Gangsta", "Hit-parade (top 40)", "Rap chrétien (christian rap)", "Pop/Funk", "Jungle", "Musique amérindienne2", "Cabaret", "New wave", "Psychédélique", "Rave", "Comédie musicale (showtunes)", "Bande-annonce", "Lo-fi", "Musique tribale", "Acid punk", "Acid jazz", "Polka", "Rétro", "Théâtre", "Rock 'n' Roll", "Hard rock"};
+    // genre is an id linking to following array (80)
+    private static final String[] GENRES = {"Blues", "Classic rock", "Country", 
+        "Dance", "Disco", "Funk", "Grunge", "Hip-hop", "Jazz", "Metal", "New age", 
+        "Oldies", "Autre", "Pop", "RnB", "Rap", "Reggae", "Rock", "Techno", "Industrial",
+        "Alternative", "Ska", "Death metal", "Pranks", "Soundtrack", "Euro techno", 
+        "Ambient", "Trip hop", "Vocal", "Jazz-funk", "Fusion", "Trance", "Classical", 
+        "Instrumental", "Acid", "House", "Video game", "Sample", "Gospel", "Noise", 
+        "Rock alternative", "Bass", "Soul", "Punk", "Space", "Meditative", "Pop instrumental", 
+        "Rock instrumental", "Ethnic", "Gothic", "Dark wave", "Techno-industrial", 
+        "Electronic", "Pop folk", "Eurodance", "Dream", "Southern rock", "Comedy", 
+        "Cult", "Gangsta", "Hit-parade (top 40)", "Christian rap", "Pop/Funk", "Jungle", 
+        "Amerindian2", "Cabaret", "New wave", "Psychedelic", "Rave", "Showtunes", 
+        "Teaser", "Lo-fi", "Tribal", "Acid punk", "Acid jazz", "Polka", "Vintage", "Theater", 
+        "Rock 'n' Roll", "Hard rock"};
 
     public ID3v1() {
-        this.title = "Unknown title";
-        this.artist = "Unknown artist";
-        this.album = "Unknown album";
-        this.year = "Unknown year";
-        this.comment = "Unknown comment";
+        this.title = new char[30];
+        this.title = "Unknown title".toCharArray();
+        this.artist = new char[30];
+        this.artist = "Unknown artist".toCharArray();
+        this.album = new char[30];
+        this.album = "Unknown album".toCharArray();
+        this.year = new char[4];
+        this.year = "Year".toCharArray();
+        this.comment = new char[28];
+        this.comment = "Unknown comment".toCharArray();
         this.track = 0;
         this.genre = 0;
     }
 
+    /**
+     * Open and extract given mp3 file tags
+     * @param uri path to mp3 file
+     * @throws FileNotFoundException
+     * @throws IOException 
+     */
     public ID3v1(String uri) throws FileNotFoundException, IOException {
 
         File file = new File(uri);
@@ -74,43 +99,48 @@ public class ID3v1 {
             tags += (char) array[ii];
         }
 
-        this.title = tags.substring(3, 33).trim();
-        this.artist = tags.substring(33, 63).trim();
-        this.album = tags.substring(63, 93).trim();
-        this.year = tags.substring(93, 97);
+        String str = tags.substring(3, 33).trim();
+        this.title = str.toCharArray();
+        str = tags.substring(33, 63).trim();
+        this.artist = str.toCharArray();
+        str = tags.substring(63, 93).trim();
+        this.album = str.toCharArray();
+        str = tags.substring(93, 97);
+        this.year = str.toCharArray();
 
         // ID3v1   : comment = 30 bytes
         // ID3v1.1 : if comment <= 28, byte 28 is 0 binary, byte 29 is track number
         int isTrackSet = tags.charAt(125);
-        System.out.println("trackset : " + isTrackSet);
         if (isTrackSet != 0) {
-            this.comment = tags.substring(97, 127).trim();
+            str = tags.substring(97, 127).trim();
+            this.comment = str.toCharArray();
             this.track = 0;
         } else {
-            this.comment = tags.substring(97, 125).trim();
+            str = tags.substring(97, 125).trim();
+            this.comment = str.toCharArray();
             this.track = tags.charAt(126);
         }
         this.genre = tags.charAt(127);
     }
 
     public String getTitle() {
-        return this.title;
+        return new String(this.title);
     }
 
     public String getArtist() {
-        return this.artist;
+        return new String(this.artist);
     }
 
     public String getAlbum() {
-        return this.album;
+        return new String(this.album);
     }
 
     public String getYear() {
-        return this.year;
+        return new String(this.year);
     }
 
     public String getComment() {
-        return this.comment;
+        return new String(this.comment);
     }
 
     public int getTrack() {
@@ -126,23 +156,43 @@ public class ID3v1 {
     }
 
     public void setTitle(String ti) {
-        this.title = ti;
+        if (ti.length() > 30) {
+            this.title = ti.substring(0, 30).toCharArray();
+        } else {
+            this.title = ti.toCharArray();
+        }
     }
 
     public void setArtist(String ar) {
-        this.artist = ar;
+        if (ar.length() > 30) {
+            this.artist = ar.substring(0, 30).toCharArray();
+        } else {
+            this.artist = ar.toCharArray();
+        }
     }
 
     public void setAlbum(String al) {
-        this.album = al;
+        if (al.length() > 30) {
+            this.album = al.substring(0, 30).toCharArray();
+        } else {
+            this.album = al.toCharArray();
+        }
     }
 
     public void setYear(String ye) {
-        this.year = ye;
+        if (ye.length() > 4) {
+            this.year = ye.substring(0, 4).toCharArray();
+        } else {
+            this.year = ye.toCharArray();
+        }
     }
 
     public void setComment(String co) {
-        this.comment = co;
+        if (co.length() > 30) {
+            this.comment = co.substring(0, 28).toCharArray();
+        } else {
+            this.comment = co.toCharArray();
+        }
     }
 
     public void setTrack(int tr) {
@@ -157,46 +207,41 @@ public class ID3v1 {
     public boolean write(String uri) throws FileNotFoundException, IOException {
         String nTags = "TAG";
 
-        String cTag = this.title;
+        String cTag = new String(this.title);
         cTag = fillWithSpaces(cTag, 30);
         nTags += cTag;
 
-        cTag = this.artist;
+        cTag = new String(this.artist);
         cTag = fillWithSpaces(cTag, 30);
         nTags += cTag;
 
-        cTag = this.album;
+        cTag = new String(this.album);
         cTag = fillWithSpaces(cTag, 30);
         nTags += cTag;
 
-        cTag = this.year;
+        cTag = new String(this.year);
         cTag = fillWithSpaces(cTag, 4);
         nTags += cTag;
 
-        cTag = this.comment;
+        cTag = new String(this.comment);
         cTag = fillWithSpaces(cTag, 28);
         nTags += cTag;
 
+        nTags += (char) 0;
+
         cTag = ((char) this.track) + "";
-        cTag = fillWithSpaces(cTag, 1);
         nTags += cTag;
 
         cTag = ((char) this.genre) + "";
-        cTag = fillWithSpaces(cTag, 1);
         nTags += cTag;
 
-        nTags += '\0';
-
         System.out.println(nTags);
-        System.out.println(nTags.length());
-
         File file = new File(uri);
         RandomAccessFile raf = new RandomAccessFile(file, "rw");
         byte[] array = new byte[128];
         int nbBytes = 128;
         raf.seek(file.length() - nbBytes);
         raf.writeBytes(nTags);
-
         return true;
     }
 
@@ -209,12 +254,22 @@ public class ID3v1 {
 
     @Override
     public String toString() {
+        String ti = new String(title);
+        ti = fillWithSpaces(ti, 30);
+        String ar = new String(artist);
+        ar = fillWithSpaces(ar, 30);
+        String al = new String(album);
+        al = fillWithSpaces(al, 30);
+        String ye = new String(year);
+        ye = fillWithSpaces(ye, 4);
+        String co = new String(comment);
+        co = fillWithSpaces(co, 28);
         return "Tags{\n"
-                + "   title    = " + title + "\n"
-                + "   artist   = " + artist + "\n"
-                + "   album    = " + album + "\n"
-                + "   year     = " + year + "\n"
-                + "   comment  = " + comment + "\n"
+                + "   title    = " + ti + " (" + ti.length() + ")\n"
+                + "   artist   = " + ar + " (" + ar.length() + ")\n"
+                + "   album    = " + al + " (" + al.length() + ")\n"
+                + "   year     = " + ye + " (" + ye.length() + ")\n"
+                + "   comment  = " + co + " (" + co.length() + ")\n"
                 + "   track    = " + track + "\n"
                 + "   genre    = " + GENRES[genre] + "\n }";
     }

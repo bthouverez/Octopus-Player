@@ -1,9 +1,8 @@
 package Model;
 
-//import android.net.Uri;
 import java.io.IOException;
 
-public class Song /*implements Comparable<Music>*/ {
+public class Song  {
 
     private static int CPT = 0;
     private int id;
@@ -16,14 +15,12 @@ public class Song /*implements Comparable<Music>*/ {
         this.id = CPT++;
         this.location = "Unknown location";
         this.tags_v1 = new ID3v1();
-        //this.tags_v2 = new ID3v2();
     }
 
     public Song(String file) throws IOException {
         this.id = CPT++;
         this.location = file;
         this.tags_v1 = new ID3v1(file);
-        //this.tags_v2 = new ID3v2(file);
     }
 
     public int getId() {
@@ -38,9 +35,6 @@ public class Song /*implements Comparable<Music>*/ {
         return this.tags_v1;
     }
     
-//    public ID3v2 getTags2() {
-//        return this.tags_v2;
-//    }
 
     public void setId(int id) {
         this.id = id;
@@ -53,11 +47,7 @@ public class Song /*implements Comparable<Music>*/ {
     public void setTags1(ID3v1 t) {
         this.tags_v1 = t;
     }
-
-//    public void setTags2(ID3v2 t) {
-//        this.tags_v2 = t;
-//    }
-    
+  
     
     public String getTitle() {
         return this.tags_v1.getTitle();
@@ -126,7 +116,7 @@ public class Song /*implements Comparable<Music>*/ {
     @Override
     public String toString() {
         return "Music{\n id=" + id + "\n"
-                + " location = " + location + "\n"
-                + "  " + tags_v1 + "\n}";
+                + " location = " + location /*+ "\n"
+                + "  " + tags_v1*/ + "\n}";
     }
 }
