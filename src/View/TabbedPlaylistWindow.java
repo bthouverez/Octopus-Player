@@ -7,6 +7,7 @@ package View;
 
 import Model.Playlist;
 import Model.Song;
+import javax.swing.table.DefaultTableModel;
 
 /**
  *
@@ -39,29 +40,10 @@ public class TabbedPlaylistWindow extends javax.swing.JFrame {
 
         jTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null}
+
             },
             new String [] {
-                "id", "filename", "title", "artist", "album", "comment", "year", "genre", "genre str"
+                "id", "dirname", "basename", "title", "artist", "album", "comment", "year", "genre", "genre str"
             }
         ));
         jScrollPane1.setViewportView(jTable);
@@ -95,20 +77,28 @@ public class TabbedPlaylistWindow extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
     public void setPlaylistName(String s) {
-        this.playlistNameLabel.setText(s);        
+        this.playlistNameLabel.setText(s);
     }
-    
+
     public void fill(Playlist p) {
-        for(int ii = 0; ii < p.size(); ii++) {
+        for (int ii = 0; ii < p.size(); ii++) {
             Song s = p.get(ii);
-            this.jTable.setValueAt(s.getId(), ii, 0);
-            this.jTable.setValueAt(s.getId(), ii, 1);
-            this.jTable.setValueAt(s.getTitle(), ii, 2);
-            this.jTable.setValueAt(s.getArtist(), ii, 3);
-            this.jTable.setValueAt(s.getAlbum(), ii, 4);
+            DefaultTableModel model = (DefaultTableModel) this.jTable.getModel();
+            model.addRow(new Object[]{
+                s.getId(), 
+                s.getDirname(), 
+                s.getBasename(), 
+                s.getTitle(), 
+                s.getArtist(), 
+                s.getAlbum(),
+                s.getComment(),
+                s.getYear(),
+                s.getGenre(),
+                s.getGenreStr()
+            });
         }
     }
- 
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel jLabel1;
     private javax.swing.JScrollPane jScrollPane1;

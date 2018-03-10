@@ -1,8 +1,9 @@
 package Model;
 
+import java.io.File;
 import java.io.IOException;
 
-public class Song  {
+public class Song {
 
     private static int CPT = 0;
     private int id;
@@ -30,25 +31,19 @@ public class Song  {
     public String getLocation() {
         return this.location;
     }
+    
+    public String getBasename() {
+        return new File(this.location).getName();
+    }
+    
+    public String getDirname() {
+        return new File(this.location).getParent();
+    }
 
     public ID3v1 getTags1() {
         return this.tags_v1;
     }
-    
 
-    public void setId(int id) {
-        this.id = id;
-    }
-
-    public void setLocation(String lo) {
-        this.location = lo;
-    }
-
-    public void setTags1(ID3v1 t) {
-        this.tags_v1 = t;
-    }
-  
-    
     public String getTitle() {
         return this.tags_v1.getTitle();
     }
@@ -76,7 +71,7 @@ public class Song  {
     public int getGenre() {
         return this.tags_v1.getGenre();
     }
-    
+
     public String getGenreStr() {
         return this.tags_v1.getGenreStr();
     }
@@ -108,15 +103,27 @@ public class Song  {
     public void setGenre(int ge) {
         this.tags_v1.setGenre(ge);
     }
-    
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public void setLocation(String lo) {
+        this.location = lo;
+    }
+
+    public void setTags1(ID3v1 t) {
+        this.tags_v1 = t;
+    }
+
     public boolean writeTags() throws IOException {
         return this.tags_v1.write(this.location);
     }
-    
+
     @Override
     public String toString() {
         return "Music{\n id=" + id + "\n"
                 + " location = " + location /*+ "\n"
-                + "  " + tags_v1*/ + "\n}";
+                 + "  " + tags_v1*/ + "\n}";
     }
 }
