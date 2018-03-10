@@ -5,6 +5,7 @@
  */
 package Model;
 
+import View.TabbedPlaylistWindow;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -16,6 +17,7 @@ import java.util.Random;
  */
 public class Playlist extends ArrayList<Song> {
 
+    private String name;
     private int currentSong;
     private boolean random;
 
@@ -23,6 +25,7 @@ public class Playlist extends ArrayList<Song> {
         super();
         this.currentSong = 0;
         this.random = false;
+        this.name = "Current playlist";
     }
 
     /**
@@ -74,11 +77,21 @@ public class Playlist extends ArrayList<Song> {
         this.random = !this.random;
     }
 
+    public String getName() {
+        return this.name;
+    }
+
+    public void setName(String n) {
+        this.name = n;
+    }
+
+    
     /**
      * Load recursively a directory and add all .mp3 files to current playlist
      * @param path path to directory to load
      * @throws IOException 
      */
+    // TODO check some more errors
     public void loadDirectory(String path) throws IOException {
         File directory = new File(path);
         File[] contents = directory.listFiles();
@@ -93,6 +106,10 @@ public class Playlist extends ArrayList<Song> {
                 }
             }
         }
+        TabbedPlaylistWindow w = new TabbedPlaylistWindow();
+        w.setVisible(true);
+        w.setPlaylistName(this.name);
+        w.fill(this);
     }
 
     @Override

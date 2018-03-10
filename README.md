@@ -15,5 +15,5 @@ See old details http://bthouverez.fr/octopus__disabled (french)
 
 ## Sources
 * [ID3.org]( http://id3.org/ ) Official ID3 tags website
-  * [ID3v1/ID3v1.1]( http://id3.org/ID3v1 ) Currently available
+  * [ID3v1.1]( http://id3.org/ID3v1 ) Currently available
   * [ID3v2]( http://id3.org/ID3v2Easy ) Under implementation 

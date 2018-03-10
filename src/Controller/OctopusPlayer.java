@@ -7,7 +7,7 @@ package Controller;
 
 import Model.Playlist;
 import Model.Song;
-import View.MainWindow;
+import View.TabbedPlaylistWindow;
 import java.io.IOException;
 
 /**
@@ -36,8 +36,5 @@ public class OctopusPlayer {
         Playlist pl = new Playlist();
         pl.loadDirectory("res/Tasbum");
         
-//        MainWindow mw = new MainWindow();
-//        mw.setVisible(true);
-
     }
 }
