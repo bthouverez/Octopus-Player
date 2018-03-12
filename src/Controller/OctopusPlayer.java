@@ -7,7 +7,6 @@ package Controller;
 
 import Model.Playlist;
 import Model.Song;
-import View.TabbedPlaylistWindow;
 import java.io.IOException;
 
 /**

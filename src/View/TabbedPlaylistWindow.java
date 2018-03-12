@@ -7,6 +7,7 @@ package View;
 
 import Model.Playlist;
 import Model.Song;
+import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -43,7 +44,7 @@ public class TabbedPlaylistWindow extends javax.swing.JFrame {
 
             },
             new String [] {
-                "id", "dirname", "basename", "title", "artist", "album", "comment", "year", "genre", "genre str"
+                "id", "dirname", "basename", "title", "artist", "album", "comment", "track", "year", "genre", "genre str"
             }
         ));
         jScrollPane1.setViewportView(jTable);
@@ -85,18 +86,30 @@ public class TabbedPlaylistWindow extends javax.swing.JFrame {
             Song s = p.get(ii);
             DefaultTableModel model = (DefaultTableModel) this.jTable.getModel();
             model.addRow(new Object[]{
-                s.getId(), 
-                s.getDirname(), 
-                s.getBasename(), 
-                s.getTitle(), 
-                s.getArtist(), 
+                s.getId(),
+                s.getDirname(),
+                s.getBasename(),
+                s.getTitle(),
+                s.getArtist(),
                 s.getAlbum(),
                 s.getComment(),
+                s.getTrack(),
                 s.getYear(),
                 s.getGenre(),
                 s.getGenreStr()
             });
         }
+        this.jTable.getColumnModel().getColumn(0).setPreferredWidth(25);
+        this.jTable.getColumnModel().getColumn(1).setPreferredWidth(350);
+        this.jTable.getColumnModel().getColumn(2).setPreferredWidth(250);
+        this.jTable.getColumnModel().getColumn(3).setPreferredWidth(150);
+        this.jTable.getColumnModel().getColumn(4).setPreferredWidth(150);
+        this.jTable.getColumnModel().getColumn(5).setPreferredWidth(150);
+        this.jTable.getColumnModel().getColumn(6).setPreferredWidth(500);
+        this.jTable.getColumnModel().getColumn(7).setPreferredWidth(60);
+        this.jTable.getColumnModel().getColumn(8).setPreferredWidth(75);
+        this.jTable.getColumnModel().getColumn(9).setPreferredWidth(100);
+        this.jTable.getColumnModel().getColumn(10).setPreferredWidth(200);
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
