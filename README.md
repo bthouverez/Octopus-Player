@@ -24,15 +24,15 @@ See old details http://bthouverez.fr/octopus (french)
 ## Structure
 
 * Java
-  Java version directory
-  Implemented with Netbeans, works on Windows (10) and Linux (Ubuntu 16.10)
+  * Java version directory
+  * Implemented with Netbeans, works on Windows (10) and Linux (Ubuntu 16.10)
   
 * Kotlin
-  Kotlin version directory
-  Implementes with IntelliJ, works on Windows (10), not yet on Linux
+  * Kotlin version directory
+  * Implemented with IntelliJ, works on Windows (10) and Linux (Ubuntu 16.10)
   
 * Ressources
-  Common files, old source code and mp3 files
+  * Common files, old source code and mp3 files
 
 ## Sources
 * [ID3.org]( http://id3.org/ ) Official ID3 tags website
