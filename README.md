@@ -23,13 +23,18 @@ See old details http://bthouverez.fr/octopus (french)
 
 ## Structure
 
-* Java
-  Java version directory
-  Implemented with Netbeans, works on Windows (10) and Linux (Ubuntu 16.10)
+* Java (will be deleted)
+  Java version, implemented with Netbeans
+  Start of code for a new version, before hearing about Kotlin...
   
 * Kotlin
-  Kotlin version directory
-  Implementes with IntelliJ, works on Windows (10), not yet on Linux
+  Kotlin version, implemented with IntelliJ
+  Working on Octopus application model, learning language
+  
+* Android
+  Android version, implemented with AndroidStudio with Kotlin support
+  ATM, consists in a basic Android test application for Android tests
+  Based on API 16, may change
   
 * Ressources
   Common files, old source code and mp3 files
