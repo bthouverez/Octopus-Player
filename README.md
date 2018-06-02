@@ -23,6 +23,7 @@ See old details http://bthouverez.fr/octopus (french)
 
 ## Structure
 
+<<<<<<< HEAD
 * Java (will be deleted)
   Java version, implemented with Netbeans
   Start of code for a new version, before hearing about Kotlin...
@@ -35,9 +36,18 @@ See old details http://bthouverez.fr/octopus (french)
   Android version, implemented with AndroidStudio with Kotlin support
   ATM, consists in a basic Android test application for Android tests
   Based on API 16, may change
+=======
+* Java
+  * Java version directory
+  * Implemented with Netbeans, works on Windows (10) and Linux (Ubuntu 16.10)
+  
+* Kotlin
+  * Kotlin version directory
+  * Implemented with IntelliJ, works on Windows (10) and Linux (Ubuntu 16.10)
+>>>>>>> ec4dcb651ec8b908295f130ea0c306a56c5bc399
   
 * Ressources
-  Common files, old source code and mp3 files
+  * Common files, old source code and mp3 files
 
 ## Sources
 * [ID3.org]( http://id3.org/ ) Official ID3 tags website
